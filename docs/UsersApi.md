@@ -4,12 +4,12 @@ All URIs are relative to *https://api.saasgrids.com/apis/crms/*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getUsers**](UsersApi.md#getUsers) | **GET** /{userId}/users | Get all users
+[**getUsers**](UsersApi.md#getUsers) | **GET** /{userId}/users/{email} | Get all users
 
 
 <a name="getUsers"></a>
 # **getUsers**
-> InlineResponse200 getUsers(userId)
+> InlineResponse200 getUsers(userId, email)
 
 Get all users
 
@@ -33,8 +33,9 @@ basicAuth.setPassword("YOUR PASSWORD");
 
 UsersApi apiInstance = new UsersApi();
 String userId = "userId_example"; // String | User instance id returned from saasgrids after authorization
+String email = "email_example"; // String | Registered emailid in Crm
 try {
-    InlineResponse200 result = apiInstance.getUsers(userId);
+    InlineResponse200 result = apiInstance.getUsers(userId, email);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling UsersApi#getUsers");
@@ -47,6 +48,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **userId** | **String**| User instance id returned from saasgrids after authorization |
+ **email** | **String**| Registered emailid in Crm |
 
 ### Return type
 

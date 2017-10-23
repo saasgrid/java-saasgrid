@@ -57,17 +57,19 @@ public class UsersApi {
     /**
      * Build call for getUsers
      * @param userId User instance id returned from saasgrids after authorization (required)
+     * @param email Registered emailid in Crm (required)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getUsersCall(String userId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call getUsersCall(String userId, String email, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
-        String localVarPath = "/{userId}/users"
-            .replaceAll("\\{" + "userId" + "\\}", apiClient.escapeString(userId.toString()));
+        String localVarPath = "/{userId}/users/{email}"
+            .replaceAll("\\{" + "userId" + "\\}", apiClient.escapeString(userId.toString()))
+            .replaceAll("\\{" + "email" + "\\}", apiClient.escapeString(email.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
 
@@ -104,15 +106,20 @@ public class UsersApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getUsersValidateBeforeCall(String userId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call getUsersValidateBeforeCall(String userId, String email, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         // verify the required parameter 'userId' is set
         if (userId == null) {
             throw new ApiException("Missing the required parameter 'userId' when calling getUsers(Async)");
         }
         
+        // verify the required parameter 'email' is set
+        if (email == null) {
+            throw new ApiException("Missing the required parameter 'email' when calling getUsers(Async)");
+        }
         
-        com.squareup.okhttp.Call call = getUsersCall(userId, progressListener, progressRequestListener);
+        
+        com.squareup.okhttp.Call call = getUsersCall(userId, email, progressListener, progressRequestListener);
         return call;
 
         
@@ -125,11 +132,12 @@ public class UsersApi {
      * Get all users
      * 
      * @param userId User instance id returned from saasgrids after authorization (required)
+     * @param email Registered emailid in Crm (required)
      * @return InlineResponse200
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse200 getUsers(String userId) throws ApiException {
-        ApiResponse<InlineResponse200> resp = getUsersWithHttpInfo(userId);
+    public InlineResponse200 getUsers(String userId, String email) throws ApiException {
+        ApiResponse<InlineResponse200> resp = getUsersWithHttpInfo(userId, email);
         return resp.getData();
     }
 
@@ -137,11 +145,12 @@ public class UsersApi {
      * Get all users
      * 
      * @param userId User instance id returned from saasgrids after authorization (required)
+     * @param email Registered emailid in Crm (required)
      * @return ApiResponse&lt;InlineResponse200&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse200> getUsersWithHttpInfo(String userId) throws ApiException {
-        com.squareup.okhttp.Call call = getUsersValidateBeforeCall(userId, null, null);
+    public ApiResponse<InlineResponse200> getUsersWithHttpInfo(String userId, String email) throws ApiException {
+        com.squareup.okhttp.Call call = getUsersValidateBeforeCall(userId, email, null, null);
         Type localVarReturnType = new TypeToken<InlineResponse200>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -150,11 +159,12 @@ public class UsersApi {
      * Get all users (asynchronously)
      * 
      * @param userId User instance id returned from saasgrids after authorization (required)
+     * @param email Registered emailid in Crm (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getUsersAsync(String userId, final ApiCallback<InlineResponse200> callback) throws ApiException {
+    public com.squareup.okhttp.Call getUsersAsync(String userId, String email, final ApiCallback<InlineResponse200> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -175,7 +185,7 @@ public class UsersApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getUsersValidateBeforeCall(userId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getUsersValidateBeforeCall(userId, email, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<InlineResponse200>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

@@ -29,7 +29,7 @@ import saasgrids.Filter;
 /**
  * InlineResponse2002
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-10-23T10:40:37.504+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-10-23T20:00:45.747+05:30")
 public class InlineResponse2002 {
   @SerializedName("filters")
   private List<Filter> filters = null;
